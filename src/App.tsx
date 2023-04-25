@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import NewMatch from "./pages/NewMatchPage";
 import Layout from "./components/Layout";
+import PlayersPage from "./pages/PlayersPage";
 
 function App() {
   return (
@@ -23,6 +24,14 @@ function App() {
           element={
             <Layout>
               <NewMatch />
+            </Layout>
+          }
+        />
+        <Route
+          path="players"
+          element={
+            <Layout>
+              <PlayersPage />
             </Layout>
           }
         />

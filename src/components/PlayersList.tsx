@@ -1,4 +1,5 @@
 import usePlayers from "../hooks/usePlayers";
+import PlayerItem from "./PlayerItem";
 
 const PlayersList = () => {
   const { players, error, loading }: any = usePlayers();
@@ -18,9 +19,7 @@ const PlayersList = () => {
     <div>
       <p>Players</p>
       {players.map((player: any) => (
-        <div key={player._id}>
-          {player.playerName} on field: {JSON.stringify(player)}
-        </div>
+        <PlayerItem key={player._id} player={player} />
       ))}
     </div>
   );

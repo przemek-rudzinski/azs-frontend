@@ -26,16 +26,19 @@ const Layout = ({ children }: any) => {
               strokeLinejoin="round"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M4 6h16M4 12h16M4 18h7"
               />
             </svg>
           </button>
-          <p className="text-green-100 font-medium font-sans mx-6 self-center">
+          <Link
+            to="/"
+            className="text-green-100 font-medium font-sans mx-6 self-center hover:text-white"
+          >
             AZS UW
-          </p>
+          </Link>
           <Link
             to="/new-match"
             className="text-green-100 font-medium font-sans hover:text-white mx-6 self-center"
@@ -49,7 +52,7 @@ const Layout = ({ children }: any) => {
             stats
           </Link>
           <Link
-            to="/"
+            to="/players"
             className="text-green-100 font-medium font-sans hover:text-white mx-6 self-center"
           >
             players
