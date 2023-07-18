@@ -33,29 +33,27 @@ const Layout = ({ children }: any) => {
               />
             </svg>
           </button>
+          <h1 className="text-green-100 font-medium font-sans mx-6 self-center ">
+            AZS UW
+          </h1>
           <Link
             to="/"
-            className="text-green-100 font-medium font-sans mx-6 self-center hover:text-white"
-          >
-            AZS UW
-          </Link>
-          <Link
-            to="/new-match"
             className="text-green-100 font-medium font-sans hover:text-white mx-6 self-center"
           >
-            new match
+            matches
           </Link>
-          <Link
-            to="/new-match"
-            className="text-green-100 font-medium font-sans hover:text-white mx-6 self-center"
-          >
-            stats
-          </Link>
+
           <Link
             to="/players"
             className="text-green-100 font-medium font-sans hover:text-white mx-6 self-center"
           >
             players
+          </Link>
+          <Link
+            to="/create-player-match"
+            className="text-green-100 font-medium font-sans hover:text-white mx-6 self-center"
+          >
+            stats
           </Link>
         </div>
         <div>

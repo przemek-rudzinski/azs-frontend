@@ -1,23 +1,24 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
-import { Player } from "../models/Player";
+import { PlayerMatch } from "../models/PlayerMatch";
 import { toast } from "react-toastify";
 
-const usePlayers = () => {
+const usePlayersMatch = (matchId: string) => {
   const navigate = useNavigate();
-  const [players, setPlayers] = useState<Player[]>([]);
+  const [playersMatch, setPlayersMatch] = useState<PlayerMatch[]>([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const headers = {};
 
-  const fetchPlayers = async () => {
+  const fetchPlayersMatch = async () => {
     try {
-      const response = await axios.get("/player/all", {
+      const response = await axios.get(`/player-match/all?matchId=${matchId}`, {
         headers,
         withCredentials: true,
       });
-      setPlayers(response.data);
+      console.log(response.data);
+      setPlayersMatch(response.data);
       setLoading(false);
     } catch (error: any) {
       toast.dismiss();
@@ -36,10 +37,10 @@ const usePlayers = () => {
   };
 
   useEffect(() => {
-    fetchPlayers();
+    fetchPlayersMatch();
   }, []);
 
-  return { players, error, loading, refetch: fetchPlayers };
+  return { playersMatch, error, loading, refetch: fetchPlayersMatch };
 };
 
-export default usePlayers;
+export default usePlayersMatch;

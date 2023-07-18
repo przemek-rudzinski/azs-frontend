@@ -1,3 +1,5 @@
+import { Player } from "../models/Player";
+
 export const FindImg = ({ name }: any) => {
   let imgPath = "";
   const imgString = `../images/${name}.png`;
@@ -9,8 +11,6 @@ export const FindImg = ({ name }: any) => {
       imgPath = require("../images/Bongo.png");
     } catch (err) {}
   }
-  //console.log("duupa");
-  // console.log(imgPath);
   return (
     <img
       src={imgPath}
@@ -22,26 +22,27 @@ export const FindImg = ({ name }: any) => {
   );
 };
 
-const PlayerItem = ({ player }: any) => {
+const PlayerItem = ({
+  player,
+  handleClick,
+}: {
+  player: Player;
+  handleClick: (player: Player) => void;
+}) => {
+  // const handleClick = () => {
+  //   console.log("clicked");
+  // };
   return (
     <>
       {player ? (
-        <li className="bg-gray-50 m-5 p-2 flex flex-row basis-1 w-80 justify-between shadow-xl rounded-lg">
+        <li
+          onClick={() => handleClick(player)}
+          className="bg-gray-50 m-5 p-2 flex flex-row basis-1 w-80 justify-between shadow-xl rounded-lg hover:shadow-lg hover:border hover:border-green-500 hover:transform hover:-translate-y-1 transition-all duration-200 "
+        >
           <div className="flex flex-row items-center ">
-            <FindImg name={player.playerName} />
-            <p className="flex m-1 text-lg">{player.playerNumber}. </p>
-            <p className="flex m-1 text-lg">{player.playerName}</p>
-          </div>
-          <div className="flex items-center">
-            <button
-              className=" bg-green-200  shadow z-50 flex-none w-14 h-10 m-2 p-1 px-2  rounded-lg text-green-600 font-bold text-lg hover:bg-green-500 hover:text-white"
-              onClick={() => {
-                console.log("change");
-              }}
-              value={player.playerName}
-            >
-              {player ? "out" : "in"}
-            </button>
+            <FindImg name={player.name} />
+            <p className="flex m-1 text-lg">{player.number}. </p>
+            <p className="flex m-1 text-lg">{player.name}</p>
           </div>
         </li>
       ) : null}
