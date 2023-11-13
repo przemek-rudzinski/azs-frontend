@@ -1,13 +1,7 @@
-import React, { useState } from "react";
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from "react-beautiful-dnd";
+import React, { useEffect, useState } from "react";
+import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { Player } from "../models/Player";
-import { players } from "../assets/samplePlayers";
-
+import DraggablePlayerItem from "./DraggablePlayerItem";
 interface Column {
   id: string;
   title: string;
@@ -18,26 +12,35 @@ interface Columns {
   [key: string]: Column;
 }
 
-const initialData: Columns = {
-  column1: {
-    id: "column1",
-    title: "Column 1",
-    players: players,
-  },
-  column2: {
-    id: "column2",
-    title: "Column 2",
-    players: [],
-  },
-  column3: {
-    id: "column3",
-    title: "Column 3",
-    players: [],
-  },
-};
+const DraggablePlayersColumns = ({
+  players: initialPlayers,
+  refetch,
+}: {
+  players: Player[];
+  refetch: any;
+}) => {
+  const [columns, setColumns] = useState<Columns>({});
 
-const DraggablePlayersColumns: React.FC = () => {
-  const [columns, setColumns] = useState<Columns>(initialData);
+  useEffect(() => {
+    // Set initial data when players prop changes
+    setColumns({
+      column1: {
+        id: "column1",
+        title: "Players",
+        players: initialPlayers,
+      },
+      column2: {
+        id: "column2",
+        title: "Squad",
+        players: [],
+      },
+      column3: {
+        id: "column3",
+        title: "Bench",
+        players: [],
+      },
+    });
+  }, [initialPlayers]);
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
@@ -72,42 +75,25 @@ const DraggablePlayersColumns: React.FC = () => {
     <div className="flex justify-center pt-8">
       <DragDropContext onDragEnd={onDragEnd}>
         {Object.values(columns).map((column) => (
-          <div className="w-64 mx-2 bg-blue-100 p-2 rounded" key={column.id}>
-            <h2 className="text-lg font-bold">{column.title}</h2>
-            <Droppable droppableId={column.id}>
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  className={`py-4 pb-14 px-2 mt-2 mb-8 space-y-2 ${
-                    snapshot.isDraggingOver ? "bg-blue-200" : ""
-                  }`}
-                >
+          <Droppable key={column.id} droppableId={column.id}>
+            {(provided, snapshot) => (
+              <div
+                className={`w-96 mx-10 bg-blue-100 rounded ${
+                  snapshot.isDraggingOver ? "bg-red-500" : ""
+                }`}
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                <h2 className="text-lg font-bold">{column.title}</h2>
+                <div className="flex flex-col justify-center ">
                   {column.players.map((player, index) => (
-                    <Draggable
-                      key={player._id}
-                      draggableId={player._id}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className={`p-2 bg-white rounded shadow ${
-                            snapshot.isDragging ? "bg-blue-300" : ""
-                          }`}
-                        >
-                          {player.name}
-                        </div>
-                      )}
-                    </Draggable>
+                    <DraggablePlayerItem player={player} index={index} />
                   ))}
-                  {provided.placeholder}
                 </div>
-              )}
-            </Droppable>
-          </div>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         ))}
       </DragDropContext>
     </div>

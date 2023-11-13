@@ -4,7 +4,7 @@ import PlayerItem from "./PlayerItem";
 import { useState } from "react";
 import EditPlayerModal from "./EditPlayerModal";
 
-type PlayersListProps = {
+export type PlayersListProps = {
   players: Player[];
   error: any;
   loading: boolean;

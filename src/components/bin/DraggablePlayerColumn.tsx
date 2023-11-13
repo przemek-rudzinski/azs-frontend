@@ -1,8 +1,8 @@
 // DraggablePlayerColumn.tsx
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import { Player } from "../models/Player";
-import DraggablePlayerItem from "./DraggablePlayerItem";
+import { Player } from "../../models/Player";
+import DraggablePlayerItem from "../DraggablePlayerItem";
 
 interface DraggablePlayerColumnProps {
   column: string;

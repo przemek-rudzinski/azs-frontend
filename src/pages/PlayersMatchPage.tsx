@@ -2,8 +2,6 @@ import PlayersMatchList from "../components/PlayersMatchList";
 import usePlayersMatch from "../hooks/usePlayersMatch";
 import { useParams } from "react-router-dom";
 import { PlayerMatch } from "../models/PlayerMatch";
-import DraggableColumns from "../components/DraggableColumns";
-import DraggablePlayersColumns from "../components/DraggablePlayersColums";
 
 const PlayersMatchPage = () => {
   const { playersMatchId } = useParams<{ playersMatchId: string }>();
@@ -43,7 +41,6 @@ const PlayersMatchPage = () => {
           loading={loading}
           refetch={refetch}
         />
-        <DraggablePlayersColumns />
       </section>
     </>
   );
